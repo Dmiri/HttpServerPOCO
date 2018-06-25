@@ -1,0 +1,72 @@
+image: Visual Studio 2017   # на этом VM-образе установлены все Visual Studio с 2008 по 2015
+
+init:
+    - git config --global core.autocrlf input
+
+clone_folder: c:\projects\my-prj # выбираем локальную директорию для клонирования
+shallow_clone: true              # копируем только последний коммит, без истории (git clone --depth 1)
+
+matrix:
+    fast_finish: false           # не/останавливаемся после возникновения ошибки в каком-то из заданий
+
+platform:
+    - x64
+    - x86
+
+configuration:
+    - Debug
+    - Release
+
+environment:
+    matrix:
+        - TOOLCHAIN: msvc10
+        - TOOLCHAIN: msvc12
+        - TOOLCHAIN: msvc14
+        - TOOLCHAIN: msvc15
+          APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+
+install:
+    - call ci\appveyor\set-env.bat %TOOLCHAIN% %TARGET_CPU% %CONFIGURATION%
+    - call ci\appveyor\install.bat
+
+build_script:
+    - mkdir build
+    - cd build
+    - conan install .. -s compiler="Visual Studio" -s compiler.version=15 -s arch=x86 -s build_type=%CONFIGURATION%
+    
+    # mkdir debug32 && cd debug32
+    # cd ..
+    # mkdir debug64 && cd debug64
+    # conan install .. -s compiler="Visual Studio" -s compiler.version=15 -s arch=x86_64 -s build_type=Debug
+    # cd ..
+    # mkdir release32 && cd release32
+    # conan install ../.. -s compiler="Visual Studio" -s compiler.version=15 -s arch=x86 -s build_type=Release
+    # cd ..
+    # mkdir release64 && cd release64
+    # conan install .. -s compiler="Visual Studio" -s compiler.version=15 -s arch=x86_64 -s build_type=Release
+    # cd ..
+    
+    - cmake ..
+    - cmake --build . --config %CONFIGURATION%
+
+test_script:
+    # скрипт тестирования проекта:
+    #- ctest -C %CONFIGURATION% --output-on-failure
+
+artifacts:
+    - path: clone_folder
+      name: "package_name"
+
+deploy:
+    # выкладываем tagged-коммиты на GitHub Releases:
+    description: '$(APPVEYOR_REPO_TAG_NAME)'
+    provider: GitHub
+
+    auth_token:
+        secure: <encrypted-github-token>
+
+    artifact: "package_name"
+    force_update: true
+
+    on:
+        appveyor_repo_tag: true
