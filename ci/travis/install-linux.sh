@@ -30,6 +30,8 @@ sudo apt-get install openssl libssl-dev
 # sudo pip install -r conans/requirements.txt
 sudo pip install conan
 
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
 
 # sudo apt-get install openssl libssl-dev
 # sudo pip install --build Poco
