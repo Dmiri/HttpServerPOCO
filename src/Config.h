@@ -2,15 +2,16 @@
 #define CONFIG_H_
 #include <string>
 #include <Poco/Net/HTTPServerParams.h>
-//#include <Poco/Net/HTTPServer.h>
+#include <Poco/Net/HTTPServer.h>
 
 //must be serialazed
 class Config
 {
 public:
-	bool config = true;
-	std::string defaultSiteDirectory{ "site" };
-	std::string defaultPage {"index.html"};
+	bool config = false;
+	std::string defaultSiteDirectory{ "../../site" };
+	std::string defaultController{ "/test" };
+	std::string defaultPage {"/Index.html"};
 	//Poco::Timespan & ThreadIdleTime{};
 	//Poco::Thread::Priority ThreadPriority{};
 	//Sets the name and port (name:port) that the server uses to identify itself.

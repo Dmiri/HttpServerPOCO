@@ -18,8 +18,7 @@
 
 class Listener : public Poco::Util::ServerApplication {
 	virtual int main(const std::vector<std::string>& args) {
-		
-		auto config(std::make_unique<Config>());
+		extern std::unique_ptr<Config, std::default_delete<Config>> config;
 
 		Poco::Net::HTTPServerParams* params = config->getConfig();
 		Poco::Net::HTTPServer server(

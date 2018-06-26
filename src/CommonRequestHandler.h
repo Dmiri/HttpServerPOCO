@@ -8,7 +8,12 @@
  
 class CommonRequestHandler : public Poco::Net::HTTPRequestHandlerFactory 
 {
-
+enum class Controller
+	{
+	Undefined,
+	Default,
+	Test
+	};	
 public:
 	CommonRequestHandler();
 	virtual Poco::Net::HTTPRequestHandler* createRequestHandler(

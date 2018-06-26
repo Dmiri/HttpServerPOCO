@@ -11,9 +11,11 @@
 SiteHandler::SiteHandler(std::string url)
 {
 	std::cerr << "url: " << url << std::endl;
-	if(url != "/")
-	fileName = "site"+ url;
-	//else fileName = "site/index.html";
+	if(url.length() > 1)
+		fileName = config->defaultSiteDirectory + url;
+	else
+		fileName = config->defaultSiteDirectory + config->defaultController + config->defaultPage;
+
 }
 
 void SiteHandler::handleRequest(Poco::Net::HTTPServerRequest& req,
@@ -24,7 +26,7 @@ void SiteHandler::handleRequest(Poco::Net::HTTPServerRequest& req,
 	std::ostream& reply = res.send();
 	if (readFile(fileName, &reply))
 		res.setStatus(Poco::Net::HTTPServerResponse::HTTP_OK);
-	else res.setStatus(Poco::Net::HTTPServerResponse::HTTP_NO_CONTENT);
+	else res.setStatus(Poco::Net::HTTPServerResponse::HTTP_REASON_NOT_FOUND);
 
 }
 

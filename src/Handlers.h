@@ -9,13 +9,18 @@
 #include <Poco/Net/HTMLForm.h>
 #include <iostream>
 #include <string>
- 
+#include <memory>
+#include "Config.h"
+
+
+extern std::unique_ptr<Config, std::default_delete<Config>> config;
+
 class SiteHandler : public Poco::Net::HTTPRequestHandler
 {
 private:
 	std::string fileName = "";
 public:
-	SiteHandler(std::string url = "/index.html");
+	SiteHandler(std::string url = "");
 
 	virtual void handleRequest(Poco::Net::HTTPServerRequest& req,
 		Poco::Net::HTTPServerResponse& res);
