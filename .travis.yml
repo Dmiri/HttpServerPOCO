@@ -37,7 +37,7 @@ script:
     # скрипт сборки и тестирования проекта:
     - mkdir build
     - cd build
-    - conan install ..
+    - sudo -H conan install ..
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION #-DTARGET_CPU=$TARGET_CPU
     - cmake --build . --config $BUILD_CONFIGURATION
     #- ctest --output-on-failure

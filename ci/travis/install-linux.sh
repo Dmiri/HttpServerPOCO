@@ -31,8 +31,6 @@ sudo apt-get install cmake
 
 sudo -H pip install conan
 
-sudo pip install conan
-
 
 # sudo apt-get install openssl libssl-dev
 # sudo pip install --build Poco
