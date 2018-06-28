@@ -3,10 +3,6 @@ set (MY_PROJECT "HttpServer")
 project(${MY_PROJECT})
 cmake_minimum_required(VERSION 3.3.2)
 
-
-# set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}  -Wall")
-# set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
-
 	
 if ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "amd64" OR "${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "AMD64" OR "${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
     set (CMAKE_SIZEOF_VOID_P 8)
@@ -32,12 +28,18 @@ endif(Debug)
 
 if (UNIX)
 	
-	SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti")
-	SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
-	SET(CMAKE_CXX_FLAGS_RELEASE "-O2")
-	SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
-    set(CMAKE_C_COMPILER /usr/bin/clang)
-	set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+	if("{CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+		set(CMAKE_C_COMPILER /usr/bin/clang)
+		set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+	else()
+		set(CMAKE_C_COMPILER /usr/bin/gcc)
+		set(CMAKE_CXX_COMPILER /usr/bin/g++)
+	endif()
+elseif(WIN32)
+
+else()
+	set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}  -Wall")
+	set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
 endif (UNIX)
 
 add_definitions("-std=c++14")
