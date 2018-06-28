@@ -37,9 +37,9 @@ script:
     # скрипт сборки и тестирования проекта:
     - mkdir build
     - cd build
-    - conan install .. --build missing \
-        -s build_type=${BUILD_CONFIGURATION} \
-        -s compiler.libcxx=libstdc++11
+    - conan install .. --build missing
+        #-s build_type=${BUILD_CONFIGURATION}
+        #-s compiler.libcxx=libstdc++11
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION #-DTARGET_CPU=$TARGET_CPU
     - cmake --build . --config $BUILD_CONFIGURATION
     #- ctest --output-on-failure
