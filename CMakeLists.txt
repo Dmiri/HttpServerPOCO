@@ -27,7 +27,14 @@ else()
 endif(Debug)
 
 if (UNIX)
-
+	
+	if("{CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "{CMAKE_CXX_COMPILER_ID}" STREQUAL "clang")
+		set(CMAKE_C_COMPILER /usr/bin/clang)
+		set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+	elseif( "{CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR "{CMAKE_CXX_COMPILER_ID}" STREQUAL "gnu")
+		set(CMAKE_C_COMPILER /usr/bin/gcc)
+		set(CMAKE_CXX_COMPILER /usr/bin/g++)
+	endif()
 elseif(WIN32)
 
 else()
