@@ -3,7 +3,7 @@ set (MY_PROJECT "HttpServer")
 project(${MY_PROJECT})
 cmake_minimum_required(VERSION 3.3.2)
 
-add_definitions("-std=c++11")
+add_definitions("-std=c++14")
 
 if ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "amd64" OR "${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "AMD64" OR "${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
     set (CMAKE_SIZEOF_VOID_P 8)
