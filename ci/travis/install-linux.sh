@@ -15,8 +15,9 @@ g++ --version
 # sudo apt update
 # sudo apt-get install -y clang-6.0
 
-echo info conan
-
+echo info pip
 sudo apt-get install python-pip -y
-sudo pip install --upgrade pip
-sudo -H pip install conan --upgrade
+#sudo pip install --upgrade pip
+
+echo info conan
+sudo -H pip install conan
