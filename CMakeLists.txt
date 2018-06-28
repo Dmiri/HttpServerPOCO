@@ -3,7 +3,8 @@ set (MY_PROJECT "HttpServer")
 project(${MY_PROJECT})
 cmake_minimum_required(VERSION 3.3.2)
 
-	
+add_definitions("-std=c++11")
+
 if ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "amd64" OR "${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "AMD64" OR "${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "x86_64")
     set (CMAKE_SIZEOF_VOID_P 8)
 
@@ -27,7 +28,10 @@ else()
 endif(Debug)
 
 if (UNIX)
-	
+	# SET(CMAKE_CXX_FLAGS "-Wall -fno-rtti")
+	# SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
+	# SET(CMAKE_CXX_FLAGS_RELEASE "-O2")
+	# SET(CMAKE_CXX_FLAGS_DEBUG  "-O0 -g")
 	if("{CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "{CMAKE_CXX_COMPILER_ID}" STREQUAL "clang")
 		set(CMAKE_C_COMPILER /usr/bin/clang)
 		set(CMAKE_CXX_COMPILER /usr/bin/clang++)
