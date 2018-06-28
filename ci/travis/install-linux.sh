@@ -1,7 +1,9 @@
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt-get update
 sudo apt-get -y install gcc-7
+sudo apt-get -y install g++-7
 gcc-7 --version
+g++-7 --version
 
 sudo apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main"
 sudo apt-get update
