@@ -35,9 +35,6 @@ else()
 	set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
 endif (UNIX)
 
-add_definitions("-std=c++14")
-
-
 include(${CMAKE_CURRENT_LIST_DIR}/build/conanbuildinfo.cmake)
 conan_basic_setup()
 
