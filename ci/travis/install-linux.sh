@@ -11,13 +11,11 @@ echo info gcc
 gcc --version
 g++ --version
 
-# sudo apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main"
-# sudo apt update
-# sudo apt-get install -y clang-6.0
+sudo apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main"
+#sudo apt update
+sudo apt-get install clang-6.0 -y
 
 echo info pip
 sudo apt-get install python-pip -y
-#sudo pip install --upgrade pip
-
 echo info conan
 sudo -H pip install conan
