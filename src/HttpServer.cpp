@@ -2,6 +2,7 @@
 //#include <Poco/Net/HTTPServer.h>
 
 #include <iostream>
+#include <memory>
 #include "Config.h"
 #include "Listener.h"
 
