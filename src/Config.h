@@ -1,13 +1,15 @@
-#ifndef CONFIG_H_
-#define CONFIG_H_
+#pragma once
+
+// All Poco includes in alphabetical order
 #include <string>
-#include <Poco/Net/HTTPServerParams.h>
+
+// All Project includes in alphabetical order
 #include <Poco/Net/HTTPServer.h>
 
 //must be serialazed
 class Config
 {
-public:
+private:
 	bool config = false;
 	std::string defaultSiteDirectory{ "../../site" };
 	std::string defaultController{ "/test" };
@@ -29,10 +31,25 @@ public:
 	std::string softwareVersion{""};
 	//Sets the connection timeout for HTTP connections.
 	const Poco::Timespan & timeout{10000};
+	
+public:
+	std::string getDefaultSiteDirectory() { return defaultSiteDirectory; };//{ "../../site" };
+	std::string getDefaultController() { return defaultController; };//{ "/test" };
+	std::string getDefaultPage() { return defaultPage; };// {"/Index.html"};
+	const std::string & getServerName() { return serverName; };//{"localhost"};
+	Poco::Net::ServerSocket getSocket() { return socket; };//{9999}; // argument is a port 
+	int getMaxQueued() { return maxQueued; };// {1000};
+	int getMaxThreads() { return maxThreads; };//{4};
+	bool getKeepAlive() { return keepAlive; };//{false};
+	const Poco::Timespan & getKeepAliveTimeout() { return keepAliveTimeout; };//{1000};
+	int getMaxKeepAliveRequests() { return maxKeepAliveRequests; };//{1000};
+	std::string getSoftwareVersion() { return softwareVersion; };//{""};
+	const Poco::Timespan & getTimeout() { return timeout; };//{10000};
+
 
 	Poco::Net::HTTPServerParams*  getConfig()
 	{
-		Poco::Net::HTTPServerParams *PocoConfig = new Poco::Net::HTTPServerParams();
+		Poco::Net::HTTPServerParams* PocoConfig = new Poco::Net::HTTPServerParams();
 		PocoConfig->setTimeout(this->timeout);
 		PocoConfig->setMaxQueued(this->maxQueued);
 		PocoConfig->setMaxThreads(this->maxThreads);
@@ -40,4 +57,3 @@ public:
 		return PocoConfig;
 	}
 };
-#endif // CONFIG_H_ 

@@ -1,29 +1,24 @@
-#ifndef SERVER_LISTENER_H_
-#define SERVER_LISTENER_H_
+#pragma once
  
-#include <Poco/Util/ServerApplication.h>
-#include <Poco/Net/HTTPServer.h>
- 
-#include <vector>
+// All STL includes in alphabetical order
 #include <string>
-#include <iostream>
 #include <memory>
- 
-#include "Config.h"
-#include "CommonRequestHandler.h"
 
-#include <Poco/Net/HTTPRequestHandler.h>
-#include <Poco/Net/HTTPServerRequest.h>
-#include <Poco/Net/HTTPServerResponse.h>
+// All Poco includes in alphabetical order
+#include <Poco/Util/ServerApplication.h>
+ 
+// All Project includes in alphabetical order
+#include "Config.h"
+#include "RequestHandlerFactory.h"
 
 class Listener : public Poco::Util::ServerApplication {
 	virtual int main(const std::vector<std::string>& args) {
-		extern std::unique_ptr<Config, std::default_delete<Config>> config;
-
+		//std::unique_ptr<Config> config(std::make_unique<Config>());
+		std::shared_ptr<Config> config(std::make_shared<Config>());
 		Poco::Net::HTTPServerParams* params = config->getConfig();
 		Poco::Net::HTTPServer server(
-			new CommonRequestHandler(),
-			config->socket,
+			new RequestHandlerFactory(config),
+			config->getSocket(),
 			params);
 
 		server.start();
@@ -34,4 +29,3 @@ class Listener : public Poco::Util::ServerApplication {
 	}
 
 };
-#endif // SERVER_LISTENER_H_

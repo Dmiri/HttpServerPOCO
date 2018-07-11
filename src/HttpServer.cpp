@@ -1,12 +1,7 @@
-//#include <Poco/Util/ServerApplication.h>
-//#include <Poco/Net/HTTPServer.h>
-
-#include <iostream>
-#include <memory>
-#include "Config.h"
+// All Project includes in alphabetical order
 #include "Listener.h"
+#include "easylogging++.h"
 
-std::unique_ptr<Config, std::default_delete<Config>> config(std::make_unique<Config>());
+INITIALIZE_EASYLOGGINGPP
 
 POCO_SERVER_MAIN(Listener)
-

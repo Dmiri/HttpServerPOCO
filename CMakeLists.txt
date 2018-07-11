@@ -29,6 +29,7 @@ if (UNIX)
 		set(CMAKE_CXX_COMPILER /usr/bin/g++)
 	endif()
 elseif(WIN32)
+
 else()
 	set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}  -Wall")
 	set (CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
@@ -51,9 +52,13 @@ set(project_SRC
 	src/Listener.h
 	src/Handlers.h
 	src/Handlers.cpp
-	src/CommonRequestHandler.h
-	src/CommonRequestHandler.cpp
+	src/RequestHandlerFactory.h
+	src/RequestHandlerFactory.cpp
 	src/Config.h
+	src/WorkWithFile.h
+	src/WorkWithFile.cpp
+	src/easylogging++.h
+	src/easylogging++.cc
 )
 add_executable(${MY_PROJECT} ${project_SRC})
 target_link_libraries(${MY_PROJECT} ${CONAN_LIBS})
